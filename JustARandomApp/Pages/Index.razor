@@ -1,20 +1,153 @@
 ﻿@page "/"
+@using JustARandomApp.Code
+@inject RanCatApiHandler RCAH
+@inject RanDogApiHandler RDAH
+@inject RanAnimeGirlApiHandler RAGAH
 
-<div class="div-col">
-    <div class="div-row">
-        <div>
-            <h1>A</h1>
+<div class="div-col smooth">
+    <div class="div-row smooth">
+        <div class="ranpicture-div smooth">
+            <h1>Random Cat Pictures</h1>
+            <img class="smooth" src="@RanCatPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="CatGenerateClicked" class="smooth">Generate</button>
         </div>
-        <div>
-            <h1>B</h1>
+        <div class="ranpicture-div smooth">
+            <h1>Random Dog Pictures</h1>
+            <img class="smooth" src="@RanDogPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="DogGenerateClicked" class="smooth">Generate</button>
         </div>
     </div>
-    <div class="div-row">
-        <div>
-            <h1>C</h1>
+    <div class="div-row smooth">
+        <div class="ranpicture-div smooth">
+            <h1>Random Waifu Pictures</h1>
+            <img class="smooth" src="@RanWaifuPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="WaifuGenerateClicked" class="smooth">Generate</button>
         </div>
-        <div>
-            <h1>D</h1>
+        <div class="ranpicture-div smooth">
+            <h1>Random Neko Pictures</h1>
+            <img class="smooth" src="@RanNekoPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="NekoGenerateClicked" class="smooth">Generate</button>
+        </div>
+    </div>
+    <div class="div-row smooth">
+        <div class="ranpicture-div smooth">
+            <h1>Random Shinobu Pictures</h1>
+            <img class="smooth" src="@RanShinobuPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="ShinobuGenerateClicked" class="smooth">Generate</button>
+        </div>
+        <div class="ranpicture-div smooth">
+            <h1>Random Megumin Pictures</h1>
+            <img class="smooth" src="@RanMeguminPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="MeguminGenerateClicked" class="smooth">Generate</button>
+        </div>
+    </div>
+    <div class="div-row smooth">
+        <div class="ranpicture-div smooth">
+            <h1>Random Bonk Pictures</h1>
+            <img class="smooth" src="@RanBonkPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="BonkGenerateClicked" class="smooth">Generate</button>
+        </div>
+        <div class="ranpicture-div smooth">
+            <h1>Random Smug Pictures</h1>
+            <img class="smooth" src="@RanSmugPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="SmugGenerateClicked" class="smooth">Generate</button>
+        </div>
+    </div>
+    <div class="div-row smooth">
+        <div class="ranpicture-div smooth">
+            <h1>Random Dance Pictures</h1>
+            <img class="smooth" src="@RanDancePicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="DanceGenerateClicked" class="smooth">Generate</button>
+        </div>
+        <div class="ranpicture-div smooth">
+            <h1>Random Happy Pictures</h1>
+            <img class="smooth" src="@RanHappyPicture" alt="Some Error Occured Please Try Again" />
+            <button @onclick="HappyGenerateClicked" class="smooth">Generate</button>
         </div>
     </div>
 </div>
+
+@code
+{
+    public string RanCatPicture = "";
+    public string RanDogPicture = "";
+    public string RanWaifuPicture = "";
+    public string RanNekoPicture = "";
+    public string RanShinobuPicture = "";
+    public string RanMeguminPicture = "";
+    public string RanBonkPicture = "";
+    public string RanSmugPicture = "";
+    public string RanDancePicture = "";
+    public string RanHappyPicture = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            RanCatPicture = await RCAH.GetImage();
+            RanDogPicture = await RDAH.GetImage();
+            RanWaifuPicture = await RAGAH.GetImage("waifu");
+            RanNekoPicture = await RAGAH.GetImage("neko");
+            RanShinobuPicture = await RAGAH.GetImage("shinobu");
+            RanMeguminPicture = await RAGAH.GetImage("megumin");
+            RanBonkPicture = await RAGAH.GetImage("bonk"); 
+            RanSmugPicture = await RAGAH.GetImage("smug");
+            RanDancePicture = await RAGAH.GetImage("dance");
+            RanHappyPicture = await RAGAH.GetImage("happy");
+            StateHasChanged();
+        }
+    }
+
+    public async void CatGenerateClicked()
+    {
+        RanCatPicture = await RCAH.GetImage();
+        StateHasChanged();
+    }
+
+    public async void DogGenerateClicked()
+    {
+        RanDogPicture = await RDAH.GetImage();
+        StateHasChanged();
+    }
+
+    public async void WaifuGenerateClicked()
+    {
+        RanWaifuPicture = await RAGAH.GetImage("waifu");
+        StateHasChanged();
+    }
+    public async void NekoGenerateClicked()
+    {
+        RanNekoPicture = await RAGAH.GetImage("neko");
+        StateHasChanged();
+    }
+    public async void ShinobuGenerateClicked()
+    {
+        RanShinobuPicture = await RAGAH.GetImage("shinobu");
+        StateHasChanged();
+    }
+    public async void MeguminGenerateClicked()
+    {
+        RanMeguminPicture = await RAGAH.GetImage("megumin");
+        StateHasChanged();
+    }
+    public async void BonkGenerateClicked()
+    {
+        RanBonkPicture = await RAGAH.GetImage("bonk");
+        StateHasChanged();
+    }
+    public async void SmugGenerateClicked()
+    {
+        RanSmugPicture = await RAGAH.GetImage("smug");
+        StateHasChanged();
+    }
+    public async void DanceGenerateClicked()
+    {
+        RanDancePicture = await RAGAH.GetImage("dance");
+        StateHasChanged();
+    }
+    public async void HappyGenerateClicked()
+    {
+        RanHappyPicture = await RAGAH.GetImage("happy");
+        StateHasChanged();
+    }
+}

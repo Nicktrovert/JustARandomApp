@@ -32,7 +32,6 @@ namespace JustARandomApp.Code
                 result = result.Replace("[", "").Replace("]", "");
                 ranCatApi = JsonConvert.DeserializeObject<RanCatApi>(result);
             }
-            System.Diagnostics.Debug.Print(ranCatApi.url + " | " + ranCatApi.id);
             return ranCatApi.url;
         }
     }
@@ -62,7 +61,6 @@ namespace JustARandomApp.Code
                 string result = await httpRM.Content.ReadAsStringAsync();
                 ranDogApi = JsonConvert.DeserializeObject<RanDogApi>(result);
             }
-            System.Diagnostics.Debug.Print(ranDogApi.message + " | " + ranDogApi.status);
             return ranDogApi.message;
         }
     }
@@ -89,7 +87,6 @@ namespace JustARandomApp.Code
                 string result = await httpRM.Content.ReadAsStringAsync();
                 ranAnimeGirlApi = JsonConvert.DeserializeObject<RanAnimeGirlApi>(result);
             }
-            System.Diagnostics.Debug.Print(ranAnimeGirlApi.url);
             return ranAnimeGirlApi.url;
         }
     }

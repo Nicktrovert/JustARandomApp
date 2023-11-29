@@ -1,31 +1,22 @@
-﻿using Microsoft.JSInterop;
-using Newtonsoft.Json;
-
+﻿using Newtonsoft.Json;
 namespace JustARandomApp.Code
 {
+    public interface IApiHandler
+    {
+        public Task<string> GetImage(string type);
+    }
     public class RanCatApi
     {
-        public string id { get; set; }
         public string url { get; set; }
-        public int width { get; set; }
-        public int height { get; set; }
     }
-    public class RanCatApiHandler
+    public class RanCatApiHandler : IApiHandler
     {
-        private HttpClient httpC;
-        private HttpResponseMessage httpRM;
-        private RanCatApi ranCatApi = new RanCatApi();
-
-        public RanCatApiHandler()
-        {
-            httpC = new HttpClient();
-            httpRM = new HttpResponseMessage();
-        }
-
-        public async Task<string> GetImage()
+        private HttpClient httpC = new();
+        private HttpResponseMessage httpRM = new();
+        private RanCatApi ranCatApi = new();
+        public async Task<string> GetImage(string type)
         {
             httpRM = await httpC.GetAsync("https://api.thecatapi.com/v1/images/search");
-
             if (httpRM.IsSuccessStatusCode)
             {
                 string result = await httpRM.Content.ReadAsStringAsync();
@@ -38,24 +29,15 @@ namespace JustARandomApp.Code
     public class RanDogApi
     {
         public string message { get; set; }
-        public string status { get; set; }
     }
-    public class RanDogApiHandler
+    public class RanDogApiHandler : IApiHandler
     {
-        private HttpClient httpC;
-        private HttpResponseMessage httpRM;
-        private RanDogApi ranDogApi = new RanDogApi();
-
-        public RanDogApiHandler()
-        {
-            httpC = new HttpClient();
-            httpRM = new HttpResponseMessage();
-        }
-
-        public async Task<string> GetImage()
+        private HttpClient httpC = new();
+        private HttpResponseMessage httpRM = new();
+        private RanDogApi ranDogApi = new();
+        public async Task<string> GetImage(string type)
         {
             httpRM = await httpC.GetAsync("https://dog.ceo/api/breeds/image/random");
-
             if (httpRM.IsSuccessStatusCode)
             {
                 string result = await httpRM.Content.ReadAsStringAsync();
@@ -68,17 +50,11 @@ namespace JustARandomApp.Code
     {
         public string url { get; set; }
     }
-    public class RanAnimeGirlApiHandler
+    public class RanAnimeGirlApiHandler : IApiHandler
     {
-        private HttpClient httpC;
-        private HttpResponseMessage httpRM;
-        private RanAnimeGirlApi ranAnimeGirlApi = new RanAnimeGirlApi();
-
-        public RanAnimeGirlApiHandler()
-        {
-            httpC = new HttpClient();
-            httpRM = new HttpResponseMessage();
-        }
+        private HttpClient httpC = new();
+        private HttpResponseMessage httpRM = new();
+        private RanAnimeGirlApi ranAnimeGirlApi = new();
         public async Task<string> GetImage(string type)
         {
             httpRM = await httpC.GetAsync("https://api.waifu.pics/sfw/" + type);

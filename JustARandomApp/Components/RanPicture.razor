@@ -1,0 +1,26 @@
+﻿@using JustARandomApp.Code
+<div class="ranpicture-div smooth">
+    <h1>Random @Type Pictures</h1>
+    <img class="smooth" src="@ranPicture" alt="Some Error Occured Please Try Again" />
+    <button @onclick="GenerateClicked" class="smooth">Generate</button>
+</div>
+@code {
+    [Parameter]
+    public string Type { get; set; }
+    [Parameter]
+    public IApiHandler ApiHandler { get; set; }
+    public string ranPicture = "";
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ranPicture = await ApiHandler.GetImage(Type.ToLower());
+            StateHasChanged();
+        }
+    }
+    public async void GenerateClicked()
+    {
+        ranPicture = await ApiHandler.GetImage(Type.ToLower());
+        StateHasChanged();
+    }
+}
